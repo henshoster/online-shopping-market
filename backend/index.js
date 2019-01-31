@@ -21,8 +21,8 @@ app.use("/login", loginRouter);
 app.use("/costumer", costumerRouter);
 app.use("/category", categoryRouter);
 app.use("/product", productRouter);
-app.use("/shopping-cart", shoppingCartRouter);
-app.use("/cart-item", cartItemRouter);
+app.use("/shopping_cart", shoppingCartRouter);
+app.use("/cart_item", cartItemRouter);
 app.use("/payment", paymentRouter);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
