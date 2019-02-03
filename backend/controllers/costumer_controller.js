@@ -19,6 +19,7 @@ class costumerController extends Controller {
   createNew(req, res, next) {
     this.updateParams(res, req);
     const obj = {
+      id: req.body.id,
       first_name: req.body.first_name,
       last_name: req.body.last_name,
       email: req.body.email,

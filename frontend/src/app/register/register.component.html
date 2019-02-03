@@ -9,10 +9,11 @@
         <div class="card-body">
           <form class="form">
             <div class="form-group">
-              <label for="id">ID number.</label>
+              <label for="id">ID number</label>
               <input
+                maxlength="9"
                 type="text"
-                [(ngModel)]="id"
+                [(ngModel)]="registerUserDate.id"
                 name="id"
                 id="id"
                 class="form-control rounded-0"
@@ -23,7 +24,7 @@
               <label for="first_name">First name</label>
               <input
                 type="text"
-                [(ngModel)]="first_name"
+                [(ngModel)]="registerUserDate.first_name"
                 id="first_name"
                 name="first_name"
                 class="form-control rounded-0"
@@ -34,7 +35,7 @@
               <label for="last_name">Last name</label>
               <input
                 type="text"
-                [(ngModel)]="last_name"
+                [(ngModel)]="registerUserDate.last_name"
                 id="last_name"
                 name="last_name"
                 class="form-control rounded-0"
@@ -45,7 +46,7 @@
               <label for="email">Email</label>
               <input
                 type="email"
-                [(ngModel)]="email"
+                [(ngModel)]="registerUserDate.email"
                 id="email"
                 name="email"
                 class="form-control rounded-0"
@@ -56,7 +57,7 @@
               <label for="password">Password</label>
               <input
                 type="password"
-                [(ngModel)]="password"
+                [(ngModel)]="registerUserDate.password"
                 id="password"
                 name="password"
                 class="form-control rounded-0"
@@ -67,7 +68,7 @@
               <label for="city">City</label>
               <input
                 type="text"
-                [(ngModel)]="city"
+                [(ngModel)]="registerUserDate.city"
                 id="city"
                 name="city"
                 class="form-control rounded-0"
@@ -78,7 +79,7 @@
               <label for="street">Street</label>
               <input
                 type="text"
-                [(ngModel)]="street"
+                [(ngModel)]="registerUserDate.street"
                 id="street"
                 name="street"
                 class="form-control rounded-0"
