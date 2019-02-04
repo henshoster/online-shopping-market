@@ -1,4 +1,5 @@
 const DataBaseConnector = require("../db/data-base-connector");
+const jwt = require("jsonwebtoken");
 
 class Login {
   constructor() {
@@ -9,12 +10,14 @@ class Login {
         throw error;
       } else {
         if (results.length === 0) {
-          this.res.send({ error: "invaild id or password" });
+          this.res.status(401).send({ error: "invaild id or password" });
         } else {
           if (results[0].password != this.req.body.password) {
-            this.res.send({ error: "invaild id or password" });
+            this.res.status(401).send({ error: "invaild id or password" });
           } else {
-            this.res.send(results);
+            const payload = { subject: this.req.body.id };
+            const token = jwt.sign(payload, "shoster");
+            this.res.status(200).send({ token });
           }
         }
       }

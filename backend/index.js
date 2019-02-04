@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
+const jwt = require("jsonwebtoken");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
@@ -12,12 +13,15 @@ const shoppingCartRouter = require("./routers/shopping_cart_router");
 const cartItemRouter = require("./routers/cart_item_router");
 const paymentRouter = require("./routers/payment_router");
 const loginRouter = require("./routers/login_router");
+const registerRouter = require("./routers/register_router");
 
 app.use(cors());
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded7
 
 app.use("/login", loginRouter);
+app.use("/register", registerRouter);
+
 app.use("/costumer", costumerRouter);
 app.use("/category", categoryRouter);
 app.use("/product", productRouter);

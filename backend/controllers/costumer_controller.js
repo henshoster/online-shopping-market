@@ -1,4 +1,6 @@
 const Controller = require("./controller");
+const jwt = require("jsonwebtoken");
+
 /*
 Costumer controller
 id int(11)
@@ -13,11 +15,24 @@ role int(1) , 0=costumer, 1=admin;
 class costumerController extends Controller {
   constructor() {
     super();
+    this.registerCallBack = (error, results, fields) => {
+      if (error) {
+        throw error;
+      } else {
+        console.log(this.id);
+        const payload = { subject: this.id };
+        const token = jwt.sign(payload, "shoster");
+        this.res.status(200).send({ token });
+      }
+    };
     this.searchTerm = "first_name";
+    this.id;
   }
 
   createNew(req, res, next) {
-    this.updateParams(res, req);
+    this.res = res;
+    this.baseUrl = "costumer";
+    this.id = req.body.id;
     const obj = {
       id: req.body.id,
       first_name: req.body.first_name,
@@ -28,7 +43,7 @@ class costumerController extends Controller {
       street: req.body.street,
       role: req.body.role
     };
-    this.db.createNew(this.defaultCallBack, this.baseUrl, obj);
+    this.db.createNew(this.registerCallBack, this.baseUrl, obj);
   }
 
   update(req, res, next) {

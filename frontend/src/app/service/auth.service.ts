@@ -7,7 +7,7 @@ import { LoginUser } from "../models/login-user";
   providedIn: "root"
 })
 export class AuthService {
-  private _registerUrl = "http://localhost:3000/costumer";
+  private _registerUrl = "http://localhost:3000/register";
   private _loginUrl = "http://localhost:3000/login";
 
   constructor(private http: HttpClient) {}
