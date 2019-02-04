@@ -13,6 +13,7 @@ import { LoginComponent } from "./login/login.component";
 import { CategoryComponent } from "./category/category.component";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { ApiConnectorService } from "./service/api-connector.service";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { HttpClientModule } from "@angular/common/http";
     MatIconModule,
     MatButtonModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, ApiConnectorService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
