@@ -1,3 +1,5 @@
+import { TokenInterceptorService } from "./service/token-interceptor.service";
+import { AuthGuard } from "./guard/auth.guard";
 import { AuthService } from "./service/auth.service";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
@@ -12,7 +14,7 @@ import { RegisterComponent } from "./register/register.component";
 import { LoginComponent } from "./login/login.component";
 import { CategoryComponent } from "./category/category.component";
 import { FormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ApiConnectorService } from "./service/api-connector.service";
 
 @NgModule({
@@ -32,7 +34,16 @@ import { ApiConnectorService } from "./service/api-connector.service";
     MatIconModule,
     MatButtonModule
   ],
-  providers: [AuthService, ApiConnectorService],
+  providers: [
+    AuthService,
+    ApiConnectorService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

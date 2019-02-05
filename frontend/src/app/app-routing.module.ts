@@ -1,3 +1,4 @@
+import { AuthGuard } from "./guard/auth.guard";
 import { LoginComponent } from "./login/login.component";
 import { CategoryComponent } from "./category/category.component";
 import { NgModule } from "@angular/core";
@@ -7,13 +8,14 @@ import { RegisterComponent } from "./register/register.component";
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "/category",
+    redirectTo: "/",
     pathMatch: "full"
   },
   {
     path: "category",
     component: CategoryComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
   {
     path: "login",
