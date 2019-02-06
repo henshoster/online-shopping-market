@@ -28,11 +28,26 @@
       </li> -->
     </ul>
     <ul class="navbar-nav">
-      <a class="nav-link" routerLink="/login" routerLinkActive="active"
+      <a
+        *ngIf="!_authService.isLoggedIn()"
+        class="nav-link"
+        routerLink="/login"
+        routerLinkActive="active"
         >Login</a
       >
-      <a class="nav-link" routerLink="/register" routerLinkActive="active"
+      <a
+        *ngIf="!_authService.isLoggedIn()"
+        class="nav-link"
+        routerLink="/register"
+        routerLinkActive="active"
         >Register</a
+      >
+      <a
+        id="logoutBtn"
+        class="nav-link"
+        *ngIf="_authService.isLoggedIn()"
+        (click)="_authService.logoutUser()"
+        >Logout</a
       >
     </ul>
   </div>
