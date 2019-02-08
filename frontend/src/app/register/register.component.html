@@ -66,14 +66,22 @@
             </div>
             <div class="form-group">
               <label for="city">City</label>
-              <input
+              <select
+                id="city"
+                name="city"
+                [(ngModel)]="registerUserDate.city"
+                class="form-control rounded-0"
+              >
+                <option *ngFor="let city of citiesNames">{{ city }}</option>
+              </select>
+              <!-- <input
                 type="text"
                 [(ngModel)]="registerUserDate.city"
                 id="city"
                 name="city"
                 class="form-control rounded-0"
                 required
-              />
+              /> -->
             </div>
             <div class="form-group">
               <label for="street">Street</label>

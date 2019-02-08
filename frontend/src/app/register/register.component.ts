@@ -10,6 +10,7 @@ import { Router } from "@angular/router";
 })
 export class RegisterComponent implements OnInit {
   registerUserDate: Costumer;
+  citiesNames: string[];
   constructor(private _auth: AuthService, private _router: Router) {
     this.registerUserDate = {
       id: null,
@@ -21,6 +22,7 @@ export class RegisterComponent implements OnInit {
       street: null,
       role: 0
     };
+    this.citiesNames = ["TLV", "JRS", "HFA", "RSL", "GVT", "RMT", "ABC"];
   }
 
   ngOnInit() {}
