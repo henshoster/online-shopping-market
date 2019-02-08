@@ -16,6 +16,8 @@ import { CategoryComponent } from "./category/category.component";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ApiConnectorService } from "./service/api-connector.service";
+import { HomePageComponent } from './home-page/home-page.component';
+import { ShoppingComponent } from './shopping/shopping.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { ApiConnectorService } from "./service/api-connector.service";
     NavbarComponent,
     RegisterComponent,
     LoginComponent,
-    CategoryComponent
+    CategoryComponent,
+    HomePageComponent,
+    ShoppingComponent
   ],
   imports: [
     BrowserModule,

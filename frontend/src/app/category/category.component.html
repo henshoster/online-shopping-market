@@ -1,4 +1,4 @@
-<div class="row mt-5">
+<!-- <div class="row mt-5">
   <div class="col-md-4 mb-3" *ngFor="let cat of category">
     <div class="card text-center">
       <div class="card-body">
@@ -10,5 +10,10 @@
         {{ cat.name }}
       </div>
     </div>
+  </div>
+</div> -->
+<div class="row mx-auto">
+  <div class="col" *ngFor="let cat of category" [id]="'caregory_' + cat.id">
+    <a href="#">{{ cat.name }}</a>
   </div>
 </div>
