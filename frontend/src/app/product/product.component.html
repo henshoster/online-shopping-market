@@ -1,0 +1,15 @@
+<div class="row mt-5">
+  <div class="col-md-4 mb-3" *ngFor="let product of products">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title">{{ product.id }}</h5>
+        <p>Future Image src: {{ product.image_src }}</p>
+        <h3 class="card-text">{{ product.name }}</h3>
+        <button class="btn btn-primary">Add to cart</button>
+      </div>
+      <div class="card-footer text-muted">
+        {{ product.category_id | categoryIdToName: _categories }}
+      </div>
+    </div>
+  </div>
+</div>

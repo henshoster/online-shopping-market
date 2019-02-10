@@ -10,7 +10,7 @@ image_src varchar(255)
 class productController extends Controller {
   constructor() {
     super();
-    this.searchTerm = "name";
+    this.searchTerm = "category_id";
   }
 
   createNew(req, res, next) {

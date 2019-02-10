@@ -24,6 +24,7 @@ class Controller {
     if (!req.query.search) {
       this.db.getAll(this.defaultCallBack, this.baseUrl);
     } else {
+      console.log("search " + req.query.search);
       this.db.getBySearch(
         this.defaultCallBack,
         this.baseUrl,
@@ -35,6 +36,7 @@ class Controller {
 
   getById(req, res, next) {
     this.updateParams(res, req);
+    console.log(this.req);
     this.db.getById(this.defaultCallBack, this.baseUrl, req.params.id);
   }
 

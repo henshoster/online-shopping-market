@@ -18,6 +18,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ApiConnectorService } from "./service/api-connector.service";
 import { HomePageComponent } from './home-page/home-page.component';
 import { ShoppingComponent } from './shopping/shopping.component';
+import { ProductComponent } from './product/product.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { CartItemComponent } from './cart-item/cart-item.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { CategoryIdToNamePipe } from './pipes/category-id-to-name.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +32,12 @@ import { ShoppingComponent } from './shopping/shopping.component';
     LoginComponent,
     CategoryComponent,
     HomePageComponent,
-    ShoppingComponent
+    ShoppingComponent,
+    ProductComponent,
+    ShoppingCartComponent,
+    CartItemComponent,
+    PageNotFoundComponent,
+    CategoryIdToNamePipe
   ],
   imports: [
     BrowserModule,

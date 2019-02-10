@@ -1,3 +1,5 @@
+import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
+import { ProductComponent } from "./product/product.component";
 import { AuthGuard } from "./guard/auth.guard";
 import { LoginComponent } from "./login/login.component";
 import { CategoryComponent } from "./category/category.component";
@@ -20,6 +22,11 @@ const routes: Routes = [
   },
   {
     path: "shopping",
+    redirectTo: "/shopping/0",
+    pathMatch: "full"
+  },
+  {
+    path: "shopping/:id",
     component: ShoppingComponent,
     pathMatch: "full"
   },
@@ -38,7 +45,8 @@ const routes: Routes = [
     path: "register",
     component: RegisterComponent,
     pathMatch: "full"
-  }
+  },
+  { path: "**", component: PageNotFoundComponent }
 ];
 
 @NgModule({

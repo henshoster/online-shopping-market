@@ -7,7 +7,7 @@ name varchar(30)
 class categoryController extends Controller {
   constructor() {
     super();
-    this.searchTerm = "name";
+    this.searchTerm = "id";
   }
 
   createNew(req, res, next) {
