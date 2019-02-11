@@ -1,23 +1,47 @@
+<div class="row">
+  <div class="my-3 mx-auto"><h1>Shopping-cart</h1></div>
+</div>
+
 <table
   mat-table
-  *ngIf="_shopping_cart_items"
-  [dataSource]="_shopping_cart_items"
+  *ngIf="dataSource"
+  [dataSource]="dataSource"
   class="mat-elevation-z8"
 >
-  <!-- Item Column -->
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef>id</th>
-    <td mat-cell *matCellDef="let transaction">{{ transaction.id }}</td>
+  <!-- product id Column -->
+  <ng-container matColumnDef="product_name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let transaction">
+      {{ transaction.product_name }}
+    </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
+  >
+  <!-- quantity Column -->
+  <ng-container matColumnDef="quantity">
+    <th mat-header-cell *matHeaderCellDef>Quantity</th>
+    <td mat-cell *matCellDef="let transaction">{{ transaction.quantity }}</td>
     <td mat-footer-cell *matFooterCellDef>Total</td>
   </ng-container>
 
-  <!-- Cost Column -->
+  <!-- price Column -->
   <ng-container matColumnDef="total_price">
     <th mat-header-cell *matHeaderCellDef>Cost</th>
     <td mat-cell *matCellDef="let transaction">
       {{ transaction.total_price | currency }}
     </td>
     <td mat-footer-cell *matFooterCellDef>{{ getTotalCost() | currency }}</td>
+  </ng-container>
+
+  <!-- remove Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let transaction">
+      <button (click)="removeCartItem(transaction.id)" mat-button color="warn">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+    <td mat-footer-cell *matFooterCellDef></td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

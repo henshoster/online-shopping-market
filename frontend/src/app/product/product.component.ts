@@ -27,7 +27,12 @@ export class ProductComponent implements OnInit {
   newCartItem(product_id, product_quantity, product_price, product_name) {
     if (product_id && product_quantity && product_price) {
       this._api
-        .createNewCartItem(product_id, product_quantity, product_price)
+        .createNewCartItem(
+          product_id,
+          product_quantity,
+          product_price,
+          product_name
+        )
         .subscribe(
           res => {
             const insertedId = res.insertId;

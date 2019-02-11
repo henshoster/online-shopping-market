@@ -32,7 +32,7 @@ export class ApiConnectorService {
   getAllCartItmes() {
     return this.http.get<any>(this._cartItemUrl);
   }
-  createNewCartItem(id, quantity, price) {
+  createNewCartItem(id, quantity, price, product_name) {
     const product_id = +id;
     const product_quantity = +quantity;
     const product_price = +price;
@@ -41,6 +41,7 @@ export class ApiConnectorService {
       product_id: product_id,
       quantity: product_quantity,
       total_price: total_price,
+      product_name: product_name,
       shopping_cart_id: 1
     });
   }
