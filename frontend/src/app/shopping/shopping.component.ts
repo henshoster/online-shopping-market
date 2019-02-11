@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
+import { ApiConnectorService } from "../service/api-connector.service";
 
 @Component({
   selector: "app-shopping",
@@ -6,10 +8,43 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./shopping.component.scss"]
 })
 export class ShoppingComponent implements OnInit {
-  constructor() {}
+  constructor(
+    private _router: Router,
+    private _route: ActivatedRoute,
+    private _api: ApiConnectorService
+  ) {}
+
   categories: [];
+  shopping_cart_id: number;
+  shopping_cart_items: any[];
+
   updatedCategories(e) {
     this.categories = e;
   }
-  ngOnInit() {}
+  createNewCartItem(e) {
+    const id = e.insertedId;
+    const product_id = e.product_id;
+    const quantity = e.product_quantity;
+    const shopping_cart_id = 1;
+    const total_price = e.product_price;
+    const newcartObj = {
+      id,
+      product_id,
+      quantity,
+      shopping_cart_id,
+      total_price
+    };
+    this.shopping_cart_items.push(newcartObj);
+  }
+
+  ngOnInit() {
+    //need to be added get by specific id
+    this._api.getAllCartItmes().subscribe(
+      res => {
+        this.shopping_cart_items = res;
+        console.log(this.shopping_cart_items);
+      },
+      err => console.log(err)
+    );
+  }
 }

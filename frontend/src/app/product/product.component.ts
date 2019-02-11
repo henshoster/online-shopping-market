@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { ApiConnectorService } from "../service/api-connector.service";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -14,12 +14,44 @@ export class ProductComponent implements OnInit {
     private _route: ActivatedRoute,
     private _api: ApiConnectorService
   ) {}
+
   categorySelected: string;
   _categories: [];
+  products: [];
+
+  @Output() emitNewCartItem: EventEmitter<any> = new EventEmitter();
   @Input() set categories(categories) {
     this._categories = categories;
   }
-  products: [];
+
+  newCartItem(product_id, product_quantity, product_price, product_name) {
+    if (product_id && product_quantity && product_price) {
+      this._api
+        .createNewCartItem(product_id, product_quantity, product_price)
+        .subscribe(
+          res => {
+            const insertedId = res.insertId;
+            this.emitNewCartItem.emit({
+              product_id,
+              product_quantity,
+              product_price,
+              product_name,
+              insertedId
+            });
+          },
+          err => {
+            if (err instanceof HttpErrorResponse) {
+              if (err.status === 401) {
+                this._router.navigate(["/login"]);
+              }
+            } else {
+              console.log(err);
+            }
+          }
+        );
+    }
+  }
+
   ngOnInit() {
     this._route.paramMap.subscribe((params: ParamMap) => {
       const id = params.get("id");
@@ -33,6 +65,8 @@ export class ProductComponent implements OnInit {
             if (err.status === 401) {
               this._router.navigate(["/login"]);
             }
+          } else {
+            console.log(err);
           }
         }
       );

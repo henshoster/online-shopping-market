@@ -5,9 +5,41 @@
         <h5 class="card-title">{{ product.id }}</h5>
         <p>Future Image src: {{ product.image_src }}</p>
         <h3 class="card-text">{{ product.name }}</h3>
-        <button class="btn btn-primary">Add to cart</button>
+        <div class="row">
+          <div class="col mx-auto">Price: {{ product.price }}$</div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label [for]="product.id">Quantity:</label>
+          </div>
+          <div class="col">
+            <input
+              type="number"
+              class="form-control"
+              [id]="product.id"
+              aria-describedby="emailHelp"
+              min="1"
+              max="20"
+              [(ngModel)]="product.quantity"
+            />
+          </div>
+        </div>
+
+        <button
+          class="btn btn-primary mt-3 "
+          (click)="
+            newCartItem(
+              product.id,
+              product.quantity,
+              product.price,
+              product.name
+            )
+          "
+        >
+          Add to cart
+        </button>
       </div>
-      <div class="card-footer text-muted">
+      <div class="card-footer text-muted ">
         {{ product.category_id | categoryIdToName: _categories }}
       </div>
     </div>

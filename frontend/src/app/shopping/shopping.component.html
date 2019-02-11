@@ -1,9 +1,14 @@
 <div class="row my-5">
   <div class="col-md-4">
-    <app-shopping-cart></app-shopping-cart>
+    <app-shopping-cart
+      [shopping_cart_items]="shopping_cart_items"
+    ></app-shopping-cart>
   </div>
   <div class="col-md-8">
     <app-category (updateCategories)="updatedCategories($event)"></app-category>
-    <app-product [categories]="categories"></app-product>
+    <app-product
+      (emitNewCartItem)="createNewCartItem($event)"
+      [categories]="categories"
+    ></app-product>
   </div>
 </div>
