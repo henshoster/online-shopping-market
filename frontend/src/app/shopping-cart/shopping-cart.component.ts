@@ -1,12 +1,5 @@
 import { ApiConnectorService } from "./../service/api-connector.service";
-import {
-  Component,
-  OnInit,
-  Input,
-  EventEmitter,
-  Output,
-  SimpleChanges
-} from "@angular/core";
+import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
 import { CartItem } from "../models/cart-item";
 
@@ -21,7 +14,6 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   dataSource = new MatTableDataSource<CartItem>();
-  flag: boolean = false;
   private _somethingHappenFlag: boolean;
   @Input() set somethingHappenFlag(value: boolean) {
     this._somethingHappenFlag = value;
@@ -63,17 +55,14 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   getTotalCost() {
-    // if (!this.flag) {
-    //   this.flag = true;
-    //   setTimeout(() => {
-    //     this.refresh();
-    //     this.flag = false;
-    //   }, 200);
-    // }
     return this._shopping_cart_items
       ? this._shopping_cart_items
           .map(t => t.total_price)
           .reduce((acc, value) => acc + value, 0)
       : null;
+  }
+
+  createOrder() {
+    console.log(this._shopping_cart_items);
   }
 }
