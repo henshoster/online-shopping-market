@@ -18,6 +18,7 @@ export class ShoppingComponent implements OnInit {
   categories: [];
   shopping_cart_id: number;
   shopping_cart_items: CartItem[];
+  somethingHappenFlag: boolean = true;
 
   updatedCategories(e) {
     this.categories = e;
@@ -27,7 +28,7 @@ export class ShoppingComponent implements OnInit {
     const product_id = e.product_id;
     const quantity = e.product_quantity;
     const shopping_cart_id = 1;
-    const total_price = e.product_price;
+    const total_price = e.product_price * quantity;
     const product_name = e.product_name;
     const newcartObj: CartItem = {
       id,
@@ -38,10 +39,14 @@ export class ShoppingComponent implements OnInit {
       product_name
     };
     this.shopping_cart_items.push(newcartObj);
+    this.somethingHappenFlag = !this.somethingHappenFlag;
   }
 
-  ngOnChanges(shopping_cart_items: CartItem[]) {
-    console.log(shopping_cart_items);
+  removeCartItem(_id) {
+    const id = _id;
+    this.shopping_cart_items = this.shopping_cart_items.filter(
+      obj => obj.id != id
+    );
   }
 
   ngOnInit() {

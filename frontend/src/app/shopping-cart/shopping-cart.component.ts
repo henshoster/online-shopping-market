@@ -1,4 +1,12 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { ApiConnectorService } from "./../service/api-connector.service";
+import {
+  Component,
+  OnInit,
+  Input,
+  EventEmitter,
+  Output,
+  SimpleChanges
+} from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
 import { CartItem } from "../models/cart-item";
 
@@ -8,17 +16,33 @@ import { CartItem } from "../models/cart-item";
   styleUrls: ["./shopping-cart.component.scss"]
 })
 export class ShoppingCartComponent implements OnInit {
-  constructor() {
+  constructor(private _api: ApiConnectorService) {
     this._shopping_cart_items = [];
   }
+
   dataSource = new MatTableDataSource<CartItem>();
   flag: boolean = false;
-  refresh() {
+  private _somethingHappenFlag: boolean;
+  @Input() set somethingHappenFlag(value: boolean) {
+    this._somethingHappenFlag = value;
     this.dataSource.data = this._shopping_cart_items;
   }
-  @Input() _shopping_cart_items: CartItem[];
+
+  private _shopping_cart_items: CartItem[];
+  @Input() set shopping_cart_items(value: CartItem[]) {
+    this._shopping_cart_items = value;
+    this.dataSource.data = this._shopping_cart_items;
+  }
+
+  @Output() emitRemoveCartItem: EventEmitter<any> = new EventEmitter();
+
   ngOnInit() {
-    this.refresh();
+    const initialInterVal = setInterval(() => {
+      if (this._shopping_cart_items) {
+        this.dataSource.data = this._shopping_cart_items;
+        clearInterval(initialInterVal);
+      }
+    }, 300);
   }
 
   displayedColumns: string[] = [
@@ -27,19 +51,25 @@ export class ShoppingCartComponent implements OnInit {
     "total_price",
     "id"
   ];
+
   removeCartItem(id) {
-    console.log(id);
+    this._api.deleteCartItem(id).subscribe(
+      res => {
+        console.log(res);
+        this.emitRemoveCartItem.emit(id);
+      },
+      err => console.log(err)
+    );
   }
-  /** Gets the total cost of all transactions. */
-  i = 0;
+
   getTotalCost() {
-    if (!this.flag) {
-      this.flag = true;
-      setTimeout(() => {
-        this.refresh();
-        this.flag = false;
-      }, 200);
-    }
+    // if (!this.flag) {
+    //   this.flag = true;
+    //   setTimeout(() => {
+    //     this.refresh();
+    //     this.flag = false;
+    //   }, 200);
+    // }
     return this._shopping_cart_items
       ? this._shopping_cart_items
           .map(t => t.total_price)

@@ -45,4 +45,7 @@ export class ApiConnectorService {
       shopping_cart_id: 1
     });
   }
+  deleteCartItem(id) {
+    return this.http.delete<any>(`${this._cartItemUrl}/${id}`);
+  }
 }

@@ -1,7 +1,9 @@
 <div class="row my-5">
   <div class="col-md-4">
     <app-shopping-cart
-      [_shopping_cart_items]="shopping_cart_items"
+      [shopping_cart_items]="shopping_cart_items"
+      (emitRemoveCartItem)="removeCartItem($event)"
+      [somethingHappenFlag]="somethingHappenFlag"
     ></app-shopping-cart>
   </div>
   <div class="col-md-8">
